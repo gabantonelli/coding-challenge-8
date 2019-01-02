@@ -21,9 +21,10 @@ class Park extends Element {
 }
 
 class Street extends Element {
-  constructor(name, buildYear, category = "normal") {
+  constructor(name, buildYear, length, category = "normal") {
     super(name, buildYear);
     this.category = category;
+    this.length = length;
   }
 }
 
@@ -60,3 +61,21 @@ const parksReport = arr => {
   const park1000 = arr.find(cur => cur.numberOfTrees > 1000);
   console.log(`${park1000.name} has more than 1000 trees.`);
 };
+
+const streetsReport = arr => {
+  console.log("-----STREETS REPORT-----");
+  //1. total and average length of town's streets
+  let total = 0;
+  for (const cur of arr) {
+    total += cur.length;
+  }
+  console.log(
+    `Our ${
+      arr.length
+    } streets have a total length of ${total} km, with an average of ${total /
+      arr.length} km.`
+  );
+};
+
+parksReport(allParks);
+streetsReport(allStreets);
