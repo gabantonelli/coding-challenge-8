@@ -21,10 +21,24 @@ class Park extends Element {
 }
 
 class Street extends Element {
-  constructor(name, buildYear, length, category = "normal") {
+  constructor(name, buildYear, length, category = 3) {
     super(name, buildYear);
     this.category = category;
     this.length = length;
+  }
+
+  classifyStreet() {
+    const classification = new Map();
+    classification.set(1, "tiny");
+    classification.set(2, "small");
+    classification.set(3, "normal");
+    classification.set(4, "big");
+    classification.set(5, "huge");
+    console.log(
+      `${this.name}, build in ${this.buildYear}, is a ${classification.get(
+        this.category
+      )} street.`
+    );
   }
 }
 
@@ -75,6 +89,10 @@ const streetsReport = arr => {
     } streets have a total length of ${total} km, with an average of ${total /
       arr.length} km.`
   );
+  //2. classify all streets
+  for (const cur of arr) {
+    cur.classifyStreet();
+  }
 };
 
 parksReport(allParks);
