@@ -12,7 +12,7 @@ class Park extends Element {
     this.area = area;
   }
 
-  calcDensity() {
+  printDensity() {
     const density = this.numberOfTrees / this.area;
     console.log(
       `${this.name} has a tree density of ${density} trees per square km.`
@@ -21,9 +21,24 @@ class Park extends Element {
 }
 
 class Street extends Element {
-  constructor(name, buildYear, category = "normal") {
+  constructor(name, buildYear, length, category = 3) {
     super(name, buildYear);
     this.category = category;
+    this.length = length;
+  }
+
+  classifyStreet() {
+    const classification = new Map();
+    classification.set(1, "tiny");
+    classification.set(2, "small");
+    classification.set(3, "normal");
+    classification.set(4, "big");
+    classification.set(5, "huge");
+    console.log(
+      `${this.name}, build in ${this.buildYear}, is a ${classification.get(
+        this.category
+      )} street.`
+    );
   }
 }
 
@@ -39,3 +54,46 @@ const allStreets = [
   new Street("4th Street", 2015, 0.8),
   new Street("Sunset Boulevard", 1982, 2.5, 5)
 ];
+
+const parksReport = arr => {
+  console.log("-----PARKS REPORT-----");
+  //1. print number of parks and average age
+  let total = 0;
+  const currYear = new Date().getFullYear();
+  for (const cur of arr) {
+    total += currYear - cur.buildYear;
+  }
+  console.log(
+    `Our ${arr.length} parks have an average of ${total / arr.length} years.`
+  );
+
+  //2. For each park print trees density
+  for (const cur of arr) {
+    cur.printDensity();
+  }
+  //3. The name of the park that has more than 1000 trees
+  const park1000 = arr.find(cur => cur.numberOfTrees > 1000);
+  console.log(`${park1000.name} has more than 1000 trees.`);
+};
+
+const streetsReport = arr => {
+  console.log("-----STREETS REPORT-----");
+  //1. total and average length of town's streets
+  let total = 0;
+  for (const cur of arr) {
+    total += cur.length;
+  }
+  console.log(
+    `Our ${
+      arr.length
+    } streets have a total length of ${total} km, with an average of ${total /
+      arr.length} km.`
+  );
+  //2. classify all streets
+  for (const cur of arr) {
+    cur.classifyStreet();
+  }
+};
+
+parksReport(allParks);
+streetsReport(allStreets);
