@@ -12,7 +12,7 @@ class Park extends Element {
     this.area = area;
   }
 
-  calcDensity() {
+  printDensity() {
     const density = this.numberOfTrees / this.area;
     console.log(
       `${this.name} has a tree density of ${density} trees per square km.`
@@ -43,15 +43,17 @@ const allStreets = [
 const parksReport = arr => {
   console.log("-----PARKS REPORT-----");
   //1. print number of parks and average age
-  const printAverageAge = () => {
-    let total = 0;
-    const currYear = new Date().getFullYear();
-    for (const cur of arr) {
-      total += currYear - cur.buildYear;
-    }
-    console.log(
-      `Our ${arr.length} parks have an average of ${total / arr.length} years.`
-    );
-  };
-  printAverageAge(arr);
+  let total = 0;
+  const currYear = new Date().getFullYear();
+  for (const cur of arr) {
+    total += currYear - cur.buildYear;
+  }
+  console.log(
+    `Our ${arr.length} parks have an average of ${total / arr.length} years.`
+  );
+
+  //2. For each park print trees density
+  for (const cur of arr) {
+    cur.printDensity();
+  }
 };
