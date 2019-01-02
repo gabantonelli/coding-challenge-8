@@ -39,3 +39,19 @@ const allStreets = [
   new Street("4th Street", 2015, 0.8),
   new Street("Sunset Boulevard", 1982, 2.5, 5)
 ];
+
+const parksReport = arr => {
+  console.log("-----PARKS REPORT-----");
+  //1. print number of parks and average age
+  const printAverageAge = () => {
+    let total = 0;
+    const currYear = new Date().getFullYear();
+    for (const cur of arr) {
+      total += currYear - cur.buildYear;
+    }
+    console.log(
+      `Our ${arr.length} parks have an average of ${total / arr.length} years.`
+    );
+  };
+  printAverageAge(arr);
+};
