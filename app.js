@@ -56,4 +56,7 @@ const parksReport = arr => {
   for (const cur of arr) {
     cur.printDensity();
   }
+  //3. The name of the park that has more than 1000 trees
+  const park1000 = arr.find(cur => cur.numberOfTrees > 1000);
+  console.log(`${park1000.name} has more than 1000 trees.`);
 };
