@@ -6,7 +6,7 @@ class Element {
 }
 
 class Park extends Element {
-  constructor(name, buildYear, numberOfTrees, area) {
+  constructor(name, buildYear, area, numberOfTrees) {
     super(name, buildYear);
     this.numberOfTrees = numberOfTrees;
     this.area = area;
